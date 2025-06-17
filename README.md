@@ -2,6 +2,8 @@
 
 A comprehensive web-based dashboard for assessing storm risk to children under five in Bangladesh at the sub-district level.
 
+![Alt text](Demo-video-Mosam.gif) 
+
 ## Features
 
 - **Interactive Map**: Sub-district level visualization of Bangladesh with storm risk classification
