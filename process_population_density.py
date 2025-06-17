@@ -58,7 +58,7 @@ def process_population_by_district():
     # Add the population data to the bangladesh_gdf
     bangladesh_gdf['children_under_five'] = bangladesh_gdf['NAME_2'].map(
         district_population
-    )
+    ).round().astype(int)
 
     # Calculate area in square kilometers
     print("Calculating population density...")
