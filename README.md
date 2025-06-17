@@ -7,7 +7,6 @@ A comprehensive web-based dashboard for assessing storm risk to children under f
 - **Interactive Map**: Sub-district level visualization of Bangladesh with storm risk classification
 - **Risk Assessment**: 5-level storm risk scoring based on Cyclone Amphan track and wind intensity
 - **Facility Mapping**: 6,964 health facilities and 7,798 education facilities plotted
-- **Hospital Density Analysis**: Classification of regions by healthcare facility density
 - **Layer Controls**: Toggle visibility of storm track, health facilities, and education facilities
 - **District Information**: Detailed popup information for each sub-district
 
