@@ -91,11 +91,10 @@ class StormRiskDashboard {
             pointToLayer: (feature, latlng) => {
                 const windSpeed = feature.properties.max_sustained_wind;
                 const radius = Math.max(3, windSpeed / 10);
-                const color = this.getWindSpeedColor(windSpeed);
                 
                 return L.circleMarker(latlng, {
                     radius: radius,
-                    fillColor: color,
+                    fillColor: '#000000',
                     color: '#fff',
                     weight: 2,
                     opacity: 1,
