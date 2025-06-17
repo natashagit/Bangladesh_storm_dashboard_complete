@@ -133,8 +133,6 @@ class StormRiskDashboard {
                 const popup = `
                     <div class="popup-title">${props.name || 'Health Facility'}</div>
                     <div class="popup-info">
-                        <span><strong>Type:</strong> ${props.amenity || 'N/A'}</span>
-                        <span><strong>Healthcare:</strong> ${props.healthcare || 'N/A'}</span>
                         ${props.addr_city ? `<span><strong>City:</strong> ${props.addr_city}</span>` : ''}
                     </div>
                 `;
@@ -159,7 +157,6 @@ class StormRiskDashboard {
                 const popup = `
                     <div class="popup-title">${props.name || 'Education Facility'}</div>
                     <div class="popup-info">
-                        <span><strong>Type:</strong> ${props.amenity || 'N/A'}</span>
                         ${props.addr_city ? `<span><strong>City:</strong> ${props.addr_city}</span>` : ''}
                     </div>
                 `;
@@ -225,7 +222,7 @@ class StormRiskDashboard {
             <div class="popup-info">
                 <span><strong>District:</strong> ${props.NAME_2}</span>
                 <span><strong>Division:</strong> ${props.NAME_1}</span>
-                <span><strong>Storm Risk:</strong> ${props.storm_risk_score || 0} <span class="risk-badge risk-${props.storm_risk_score || 0}">${this.getRiskLabel(props.storm_risk_score || 0)}</span></span>
+                <span><strong>Severity Level:</strong> ${props.storm_risk_score || 0} <span class="risk-badge risk-${props.storm_risk_score || 0}">${this.getRiskLabel(props.storm_risk_score || 0)}</span></span>
                 <span><strong>Health Facilities:</strong> ${props.health_facility_count || 0}</span>
                 <span><strong>Education Facilities:</strong> ${props.education_facility_count || 0}</span>
                 <span><strong>Hospital Density:</strong> ${props.hospital_density_class || 'Low'}</span>
