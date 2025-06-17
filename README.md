@@ -1,4 +1,4 @@
-# Mosam: Bangladesh Storm Risk Dashboard
+# Mosam: Monitoring and Observation for Storm Assessment and Mobilization (Bangladesh)
 
 A comprehensive web-based dashboard for assessing storm risk to health and education facilities in Bangladesh at the sub-district level.
 
