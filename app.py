@@ -14,7 +14,7 @@ health_gdf = data["health_gdf"]
 education_gdf = data["education_gdf"]
 
 # Load classified Bangladesh data
-bangladesh_classified = gpd.read_file("bangladesh_classified.geojson")
+bangladesh_classified = gpd.read_file("bangladesh_classified_with_children.geojson")
 
 @app.route('/')
 def index():
