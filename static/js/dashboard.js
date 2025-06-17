@@ -304,6 +304,12 @@ class StormRiskDashboard {
                 this.map.removeLayer(this.layers.educationFacilities);
             }
         });
+
+        // Export Data button event
+        const exportBtn = document.getElementById('export-data-btn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportDistrictDataCSV());
+        }
     }
 
     hideLoading() {
@@ -322,6 +328,74 @@ class StormRiskDashboard {
                 <p>${message}</p>
             </div>
         `;
+    }
+
+    exportDistrictDataCSV() {
+        // Map risk_level to a sort order
+        const riskOrder = {
+            'Very High': 5,
+            'High': 4,
+            'Medium': 3,
+            'Low': 2,
+            'Very Low': 1,
+            'No Risk': 0
+        };
+        // Build a map of health/education facilities by district (aggregate by district name from GeoJSON only)
+        const healthByDistrict = {};
+        this.data.health.features.forEach(f => {
+            const district = f.properties.DISTRICT || f.properties.district || f.properties.NAME_2 || '';
+            if (!district) return;
+            if (!healthByDistrict[district]) healthByDistrict[district] = [];
+            if (f.properties.name) healthByDistrict[district].push(f.properties.name);
+        });
+        const educationByDistrict = {};
+        this.data.education.features.forEach(f => {
+            const district = f.properties.DISTRICT || f.properties.district || f.properties.NAME_2 || '';
+            if (!district) return;
+            if (!educationByDistrict[district]) educationByDistrict[district] = [];
+            if (f.properties.name) educationByDistrict[district].push(f.properties.name);
+        });
+        // Prepare rows: one per district in GeoJSON
+        const seenDistricts = new Set();
+        const rows = this.data.bangladesh.features.map(f => {
+            const props = f.properties;
+            const district = props.NAME_2;
+            if (seenDistricts.has(district)) return null; // skip duplicate
+            seenDistricts.add(district);
+            const healthNames = healthByDistrict[district] || [];
+            const educationNames = educationByDistrict[district] || [];
+            return {
+                'District Name': district,
+                'Number of children under 5': Math.round(props.children_under_five || 0),
+                'Count of Health Facilities': props.health_facility_count || healthNames.length,
+                'Count of Education Facilities': props.education_facility_count || educationNames.length,
+                'Severity Level': props.risk_level || ''
+            };
+        }).filter(Boolean);
+        // Sort rows by severity level (highest to lowest)
+        rows.sort((a, b) => (riskOrder[b['Severity Level']] || 0) - (riskOrder[a['Severity Level']] || 0));
+        // CSV header
+        const header = [
+            'District Name',
+            'Number of children under 5',
+            'Count of Health Facilities',
+            'Count of Education Facilities',
+            'Severity Level'
+        ];
+        // Convert to CSV string
+        const csv = [header.join(',')].concat(
+            rows.map(row => header.map(h => '"' + String(row[h]).replace(/"/g, '""') + '"').join(','))
+        ).join('\n');
+        // Download
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'bangladesh_districts_export.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 }
 
