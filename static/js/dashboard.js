@@ -225,7 +225,6 @@ class StormRiskDashboard {
                 <span><strong>Severity Level:</strong> ${props.storm_risk_score || 0} <span class="risk-badge risk-${props.storm_risk_score || 0}">${this.getRiskLabel(props.storm_risk_score || 0)}</span></span>
                 <span><strong>Health Facilities:</strong> ${props.health_facility_count || 0}</span>
                 <span><strong>Education Facilities:</strong> ${props.education_facility_count || 0}</span>
-                <span><strong>Hospital Density:</strong> ${props.hospital_density_class || 'Low'}</span>
                 <span><strong>Children Under 5:</strong> ${props.children_under_five?.toLocaleString() || 0}</span>
             </div>
         `;
@@ -242,7 +241,6 @@ class StormRiskDashboard {
             <p><strong>Risk Level:</strong> ${this.getRiskLabel(props.storm_risk_score || 0)}</p>
             <p><strong>Health Facilities:</strong> ${props.health_facility_count || 0}</p>
             <p><strong>Education Facilities:</strong> ${props.education_facility_count || 0}</p>
-            <p><strong>Hospital Density:</strong> ${props.hospital_density_class || 'Low'}</p>
             <p><strong>Children Under 5:</strong> ${props.children_under_five?.toLocaleString() || 0}</p>
         `;
     }

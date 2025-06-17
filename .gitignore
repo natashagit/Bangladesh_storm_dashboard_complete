@@ -70,4 +70,3 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg 
-bgd_children_under_five_2020.csv
