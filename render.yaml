@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: bangladesh-storm-dashboard
+    env: python
+    buildCommand: |
+      apt-get update && \
+      apt-get install -y g++ python3-dev libgdal-dev gdal-bin libproj-dev proj-data proj-bin && \
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app 
