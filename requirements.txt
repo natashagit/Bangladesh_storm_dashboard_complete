@@ -1,3 +1,4 @@
+pip>=23.1
 setuptools
 wheel
 Flask==2.0.1
